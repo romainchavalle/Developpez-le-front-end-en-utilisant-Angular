@@ -1,0 +1,25 @@
+
+<div class="container">
+  <!-- ENTETE  -->
+  <h1>Medals per country</h1>
+  <div class="counters-container">
+    <div class="counter">
+      <h2>Numbers of JOs</h2>
+      <p><strong>{{ olympicsNumber }}</strong></p>
+    </div>
+    <div class="counter">
+      <h2>Numbers of countries</h2>
+      <p><strong>{{ chartData.length }}</strong></p>
+    </div>
+  </div>
+
+    <!-- CHART  -->
+  <div class="chart-container" *ngIf="chartData.length > 0">
+    <ngx-charts-pie-chart
+      [results]="chartData"
+      [labels]="true"
+      (select)="onSelect($event)"
+    >
+    </ngx-charts-pie-chart>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="container">
+
+  <a routerLink="">Back</a>
+
+    <!-- ENTETE  -->
+  <h1>{{ lineData[0].name}}</h1>
+  <div class="counters-container">
+    <div class="counter">
+      <h2>Numbers of entries</h2>
+      <p><strong>{{lineData[0].series.length}}</strong></p>
+    </div>
+    <div class="counter">
+      <h2>Total number medals</h2>
+      <p><strong>{{medalsNumber}}</strong></p>
+    </div>
+    <div class="counter">
+      <h2>Total number of athletes</h2>
+      <p><strong>{{athletesNumber}}</strong></p>
+    </div>
+  </div>
+
+  <!-- CHART  -->
+  <div class="chart-container" *ngIf="lineData.length > 0">
+    <ngx-charts-line-chart
+      [scheme]="'cool'"
+      [results]="lineData"
+      [xAxis]="true"
+      [yAxis]="true"
+      [showXAxisLabel]="true"
+      [xAxisLabel]="'Year'"
+    >
+    </ngx-charts-line-chart>
+  </div>
+</div>
