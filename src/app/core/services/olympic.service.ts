@@ -24,12 +24,12 @@ export class OlympicService {
     );
   };
 
-
+  // method to call to get the data into the component //
   getOlympics() {
     return this.olympics$.asObservable();
   }
 
-
+  // method to count medals specifiquely //
   countMedals(olympic: Olympic): number {
     let medals: number = 0;
 

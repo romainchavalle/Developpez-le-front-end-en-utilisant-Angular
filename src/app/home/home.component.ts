@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { CommonModule } from '@angular/common';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -16,20 +16,26 @@ import { Olympic } from '../core/models/Olympic';
 
 export class HomeComponent implements OnInit {
 
-  // set up Types
+  // set up Types //
   olympics$! : Observable<Olympic[]>;
   chartData: ChartData[] = [];
   olympicsNumber: number = 0;
+  subscription!: Subscription;
 
   constructor(private olympicService: OlympicService, private router: Router) {}
+
+  // Unsubscribe to avoid data fleeing //
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   ngOnInit(): void {
 
     this.olympics$ = this.olympicService.getOlympics();
 
-    this.olympics$.subscribe((olympics) => {
+    this.subscription = this.olympics$.subscribe((olympics) => {
 
-      // CALCUL CHART DATA //
+      // FORMAT CHART DATA //
       for (let olympic of olympics) {
         this.chartData.push({
           name: olympic.country,
@@ -37,7 +43,7 @@ export class HomeComponent implements OnInit {
         })
       }
 
-      // CALCUL OLYMPICS NUMBER //
+      // FORMAT OLYMPICS NUMBER //
       const allYears = olympics.flatMap((olympic) =>
         olympic.participations.map((participation) => participation.year));
       const uniqueYears = new Set(allYears);
@@ -46,7 +52,7 @@ export class HomeComponent implements OnInit {
 
   }
 
-  // Navigating into differents views
+  // Navigating into differents views //
   onSelect(event: any) {
     const countryName = event.name;
     this.router.navigate(['/details', countryName]);
