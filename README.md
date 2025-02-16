@@ -14,8 +14,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Where to start
 
-- `components` folder: contains every reusable components
-- `pages` folder: contains components used for routing
+- `components` : 2 principals components to navigate into the content
 - `core` folder: contains the business logic (`services` and `models` folders)
 
 I suggest you to start by understanding this starter code. Pay an extra attention to the `app-routing.module.ts` and the `olympic.service.ts`.
