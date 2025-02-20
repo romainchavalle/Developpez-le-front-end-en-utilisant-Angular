@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
   }
 
   // Navigating into differents views //
-  onSelect(event: any) {
+  onSelect(event: ChartData) {
     const countryName = event.name;
     this.router.navigate(['/details', countryName]);
   }
